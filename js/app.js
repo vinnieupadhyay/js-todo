@@ -8,6 +8,7 @@ loadEvent();
 function loadEvent(){
 	form.addEventListener('submit', addTask);
 	taskList.addEventListener('click', deletTask);
+	clrButton.addEventListener('click', clearTaskList);
 }
 
 //add task event
@@ -36,4 +37,12 @@ function deletTask(e){
 	if(e.target.parentElement.classList.contains('delete-item')){
 		e.target.parentElement.parentElement.remove();
 	}
+}
+
+//clear tasklist
+function clearTaskList(e){
+	while(taskList.firstChild){
+		taskList.removeChild(taskList.firstChild);
+	}
+	e.preventDefault();
 }
