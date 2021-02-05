@@ -1,12 +1,13 @@
 let form = document.querySelector('#task-form'),
-	  taskList = document.querySelector('.collection'),
-	  clrButton = document.querySelector('.clear-tasks'),
-	  textInput = document.querySelector('#task');
+	taskList = document.querySelector('.collection'),
+	clrButton = document.querySelector('.clear-tasks'),
+	textInput = document.querySelector('#task');
 
 loadEvent();
 //load all events
 function loadEvent(){
 	form.addEventListener('submit', addTask);
+	taskList.addEventListener('click', deletTask);
 }
 
 //add task event
@@ -28,4 +29,11 @@ function addTask(e){
 		taskList.appendChild(li);
 		
 	e.preventDefault();
+}
+
+//remove task event
+function deletTask(e){
+	if(e.target.parentElement.classList.contains('delete-item')){
+		e.target.parentElement.parentElement.remove();
+	}
 }
