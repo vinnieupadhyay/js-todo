@@ -11,6 +11,7 @@ function loadEvent(){
 	taskList.addEventListener('click', deletTask);
 	clrButton.addEventListener('click', clearTaskList);
 	filterInput.addEventListener('keyup', filterTask);
+
 }
 
 //add task event
@@ -27,9 +28,13 @@ function addTask(e){
 		linkDelete.className = 'delete-item secondary-content';
 		linkDelete.innerHTML = '<i class="fa fa-remove"></i>';
 		
-		li.appendChild(linkDelete);
+	li.appendChild(linkDelete);
 
-		taskList.appendChild(li);
+	taskList.appendChild(li);
+
+	addTaskToLocalStorage(textInput.value);
+
+	textInput.value = '';
 		
 	e.preventDefault();
 }
@@ -62,4 +67,20 @@ function filterTask(e){
 			task.style.display = 'none';
 		}
 	});
+}
+
+//Add task to local storage
+function addTaskToLocalStorage(task){
+	let tasks;
+
+	if(localStorage.getItem('tasks') === null){
+		tasks = [];
+	} else {
+		tasks = JSON.parse(localStorage.getItem('tasks'));
+	}
+
+	tasks.push(task);
+
+	localStorage.setItem('tasks', JSON.stringify(tasks));
+
 }
